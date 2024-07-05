@@ -4,6 +4,7 @@ toc: true
 format: 
   typst: default
   html: default
+  gfm: default
 ---
 
 ---
