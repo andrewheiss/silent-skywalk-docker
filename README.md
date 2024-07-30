@@ -1,14 +1,23 @@
 # Why Donors Donate replication code
 
 
-- [Overview](#overview)
+- [Getting started](#getting-started)
 - [Method 1: Docker Compose
   (recommended)](#method-1-docker-compose-recommended)
 - [Method 2: {renv} locally](#method-2-renv-locally)
 
+<!-- README.md is generated from README.qmd. Please edit that file -->
+This is a Docker container to help with the replication of [“Why Donors
+donate”](https://github.com/andrewheiss/silent-skywalk)
+
 ------------------------------------------------------------------------
 
-## Overview
+To maximize replicability, we wrote the manuscript using
+[Quarto](https://quarto.org/), which allowed us to mix computational
+figures, text, and tables with the actual prose of the manuscript. This
+means that there’s no need to rely on comments within code to identify
+the location of each appropriate result in the manuscript—all results
+are programmatically included when rendering the document.
 
 We use the [{renv}
 package](https://rstudio.github.io/renv/articles/renv.html) to create a
@@ -27,27 +36,58 @@ Docker container built and orchestrated with Docker Compose, or (2)
 restoring a {renv} environment on your local computer.
 
 The data for the analysis is accessible in
-`why-donors-donate/data/raw_data`. The {targets} pipeline cleans this
-data and creates an object named `data_full`—load it into an R session
-with `targets::tar_load(data_full)`.
+`silent-skywalk/data/raw_data`. The {targets} pipeline cleans this data
+and creates an object named `data_full`—load it into an R session with
+`targets::tar_load(data_full)`.
+
+------------------------------------------------------------------------
 
 The complete {targets} pipeline generates two output artifacts:
 
 - **Manuscript**: An HTML version of the manuscript and appendix,
-  located at `why-donors-donate/manuscript/output/manuscript.html` (or
-  at `http://localhost:8888/notebook/manuscript.html` if you run the
+  located at `silent-skywalk/manuscript/output/manuscript.html` (or at
+  `http://localhost:8888/notebook/manuscript.html` if you run the
   pipeline with Docker Compose).
 - **Analysis notebook**: A static website containing more complete
   details about the survey, experiment design, preregistration,
   statistical methods and other information, located at
-  `why-donors-donate/_site` (or at `http://localhost:8888` if yo run the
+  `silent-skywalk/_site` (or at `http://localhost:8888` if you run the
   pipeline with Docker Compose).
+
+## Getting started
+
+The repository for the paper itself is accessible at
+<https://github.com/andrewheiss/silent-skywalk> and should be cloned
+into this repository into a folder named `silent-skywalk`. You can
+either download the repository from GitHub or run this command in the
+terminal:
+
+``` sh
+git clone https://github.com/andrewheiss/silent-skywalk.git
+```
+
+Make sure the folder structure looks like this:
+
+``` text
+.
+├── README.md
+├── README.pdf
+├── docker-compose.yml
+├── Dockerfile
+├── ...
+├── img/
+├── ...
+└── silent-skywalk
+    ├── README.md
+    ├── silent-skywalk.Rproj
+    └── ...
+```
 
 ## Method 1: Docker Compose (recommended)
 
 The entire analysis can be run in a Docker container based on R 4.3.3,
 with all packages locked at specific versions defined in
-`why-donors-donate/renv.lock`.
+`silent-skywalk/renv.lock`.
 
 Here’s how to do this:
 
@@ -108,8 +148,8 @@ Here’s how to do this:
     `http://localhost:8888/notebook/manuscript.html`).
 
     You can also see these outputs on your computer: the analysis
-    notebook is at `why-donors-donate/_site` and the manuscript is at
-    `why-donors-donate/manuscript/output/manuscript.html`.
+    notebook is at `silent-skywalk/_site` and the manuscript is at
+    `silent-skywalk/manuscript/output/manuscript.html`.
 
 7.  Additionally, you can explore the data and analysis in an RStudio
     session in your browser if you visit `http://localhost:8787`. Any
@@ -119,8 +159,8 @@ Here’s how to do this:
 
 It’s also possible to not use Docker and instead run everything locally.
 
-1.  Open `why-donors-donate/why-donors-donate.Rproj` to open a new
-    RStudio project.
+1.  Open `silent-skywalk/silent-skywalk.Rproj` to open a new RStudio
+    project.
 
 2.  Run `renv::restore()` to install all the packages.
 
@@ -134,5 +174,5 @@ It’s also possible to not use Docker and instead run everything locally.
     will take 30–40 minutes the first time.
 
 6.  When the pipeline is all the way done, find the analysis notebook at
-    `why-donors-donate/_site` and the manuscript at
-    `why-donors-donate/manuscript/output/manuscript.html`.
+    `silent-skywalk/_site` and the manuscript at
+    `silent-skywalk/manuscript/output/manuscript.html`.

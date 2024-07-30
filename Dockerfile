@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 FROM rocker/tidyverse:4.3.3 AS renv-base
 
-ARG PROJECT="why-donors-donate"
+ARG PROJECT="silent-skywalk"
 
 # Install system dependencies
 RUN apt-get update -y \
